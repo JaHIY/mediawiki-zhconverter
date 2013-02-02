@@ -21,7 +21,7 @@ print_error() {
 convert_chinese() {
     local AWK_SYNTAX='BEGIN{print "<pre>-{}-"}{print $0}END{print "</pre>"}'
     local MEDIAWIKI_API='http://zh.wikipedia.org/w/api.php'
-    local MEDIAWIKI_DATA='action=parse&format=json&prop=text&disablepp=true&uselang='
+    local MEDIAWIKI_DATA='action=parse&format=json&prop=text&disablepp=true&onlypst=true&uselang='
     local MEDIAWIKI_RETURN_SUBSTITUTE='s/^.*"text":{"\*":"<pre>\\n\(.*\)\\n<\\\/pre>\\n"}}}$/\1/'
     local MEDIAWIKI_USELANG="${1}"
     shift
