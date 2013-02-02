@@ -6,7 +6,7 @@ eval set -- "$ARGV"
 print_usage() {
     printf '%s\n' \
             "Usage: ${0} [OPTION...] [FILE...]" \
-            'Convert Simplified Chinese to Traditional Chinese or convert Traditional Chinese to Simplified Chinese.' \
+            'Convert Simplified Chinese to Traditional Chinese or convert Traditional Chinese to Simplified Chinese by MediaWiki API.' \
             '' \
             'Options:' \
             ' -t, --to-code=NAME        Set langage for output! at this you can use zh-cn, zh-hans, zh-hant, zh-hk, zh-sg or zh-tw(default)' \
