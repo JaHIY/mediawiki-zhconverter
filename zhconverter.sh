@@ -25,7 +25,7 @@ convert_chinese() {
     local MEDIAWIKI_RETURN_SUBSTITUTE='s/^.*"text":{"\*":"<pre>\\n\(.*\)\\n<\\\/pre>\\n"}}}$/\1/'
     local MEDIAWIKI_USELANG="${1}"
     shift
-    sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g' "$@" | awk "$AWK_SYNTAX" | curl -s -d "${MEDIAWIKI_DATA}${MEDIAWIKI_USELANG}" --data-urlencode "text@-" "$MEDIAWIKI_API" | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e "$MEDIAWIKI_RETURN_SUBSTITUTE"
+    printf '%b' $(sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g' "$@" | awk "$AWK_SYNTAX" | curl -s -d "${MEDIAWIKI_DATA}${MEDIAWIKI_USELANG}" --data-urlencode "text@-" "$MEDIAWIKI_API" | sed -e 's/&lt;/</g' -e 's/&gt;/>/g' -e "$MEDIAWIKI_RETURN_SUBSTITUTE") | sed -e 's;\\\/;/;g'
 }
 
 main() {
