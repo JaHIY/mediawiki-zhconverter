@@ -24,7 +24,7 @@ print_error() {
 
 convert_chinese() {
     local awk_syntax='BEGIN{print "<pre>-{}-"}{print $0}END{print "</pre>"}'
-    local mediawiki_api='http://zh.wikipedia.org/w/api.php'
+    local mediawiki_api='https://zh.wikipedia.org/w/api.php'
     local mediawiki_data='action=parse&format=json&prop=text&disablepp=true&uselang='
     local mediawiki_return_substitute='s/^.*"text":{"\*":"<pre>\\n\(.*\)\\n<\\\/pre>\\n"}}}$/\1/'
     local mediawiki_uselang="${1}"
