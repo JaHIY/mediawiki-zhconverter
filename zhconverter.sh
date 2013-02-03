@@ -1,6 +1,6 @@
 #!/bin/sh -
 
-ARGV=$(getopt -o 't:h' -l 'to-code:,help' -n "$0" -- "$@")
+ARGV=$(getopt -o 't:h' -l 'to-code:,help' -n "${0}" -- "$@")
 eval set -- "$ARGV"
 
 print_usage() {
