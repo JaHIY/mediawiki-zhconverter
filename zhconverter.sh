@@ -35,7 +35,7 @@ convert_chinese() {
                 curl -s -d "${mediawiki_data}${mediawiki_uselang}" --data-urlencode "text@-" "$mediawiki_api" | \
                 sed -e "$mediawiki_return_substitute" -e 's/&#125;/}/g' -e 's/&#123;/{/g' \
                     -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/;') | \
-   sed -e 's;\\\/;/;g'
+        sed -e 's;\\\/;/;g'
 }
 
 main() {
