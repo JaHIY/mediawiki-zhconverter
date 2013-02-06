@@ -11,7 +11,7 @@ print_usage() {
             '' \
             'Options:' \
             ' -t, --to-code=NAME        Set langage for output! at this you can use zh-cn,' \
-            '                           zh-hans, zh-hant, zh-hk, zh-sg or zh-tw(default)' \
+            '                           zh-hans, zh-hant, zh-hk, zh-sg or zh-tw(default).' \
             ' -h, --help                Show this help list.'
 }
 
@@ -53,14 +53,8 @@ main() {
                 ;;
             '--')
                 shift
-                if [ $# -gt 0 ]
-                then
-                    convert_chinese "$mediawiki_uselang" "$@"
-                    break
-                else
-                    print_error
-                    return 2
-                fi
+                convert_chinese "$mediawiki_uselang" "$@"
+                break
                 ;;
             *)
                 print_error
