@@ -23,18 +23,17 @@ print_error() {
 }
 
 convert_chinese() {
-    local awk_syntax='BEGIN{print "<pre>-{}-"}{print $0}END{print "</pre>"}'
     local mediawiki_api='https://zh.wikipedia.org/w/api.php'
     local mediawiki_data='action=parse&format=json&prop=text&disablepp=true&uselang='
     local mediawiki_return_substitute='s/^.*"text":{"\*":"<pre>\\n\(.*\)\\n<\\\/pre>\\n"}}}$/\1/'
     local mediawiki_uselang="${1}"
     shift
     printf '%b' \
-                $(sed -e 's/&/\&amp;/;' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/{/\&#123;/g' -e 's/}/\&#125;/g' "$@" | \
-                awk "$awk_syntax" | \
+                $(sed -e 's/&/\&amp;/;' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/{/\&#123;/g' -e 's/}/\&#125;/g' \
+                -e '1i\<pre>-{}-' -e '$a\</pre>' "$@" | \
                 curl -s -d "${mediawiki_data}${mediawiki_uselang}" --data-urlencode "text@-" "$mediawiki_api" | \
                 sed -e "$mediawiki_return_substitute" -e 's/&#125;/}/g' -e 's/&#123;/{/g' \
-                    -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/;') | \
+                    -e 's/&gt;/>/g' -e 's/&lt;/</g' -e 's/&amp;/\&/;' -e 's/ /\\u0020/g') | \
         sed -e 's;\\\/;/;g'
 }
 
